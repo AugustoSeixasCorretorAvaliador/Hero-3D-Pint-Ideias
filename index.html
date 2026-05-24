@@ -73,9 +73,21 @@
     text-decoration:none;
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
   }
   .logo span{color:var(--orange);}
+  .logo-mascot{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 8px rgba(0,180,255,0.5));
+    animation:float-mascot 4s ease-in-out infinite;
+    flex-shrink:0;
+  }
+  @keyframes float-mascot{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+  }
   nav{display:flex;align-items:center;gap:32px;}
   nav a{
     color:var(--muted);
@@ -525,6 +537,50 @@
     inset:0;
     background:linear-gradient(to top,rgba(3,6,16,0.7),transparent);
   }
+  .carousel-card{cursor:zoom-in;}
+
+  /* ====== LIGHTBOX ====== */
+  #lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:rgba(0,0,0,0.92);
+    backdrop-filter:blur(10px);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    cursor:zoom-out;
+  }
+  #lightbox.open{display:flex;}
+  #lightbox img{
+    max-width:92vw;
+    max-height:92vh;
+    object-fit:contain;
+    border-radius:12px;
+    box-shadow:0 0 60px rgba(255,107,0,0.2),0 0 120px rgba(0,180,255,0.1);
+    animation:lb-in .25s ease;
+    cursor:default;
+  }
+  @keyframes lb-in{
+    from{opacity:0;transform:scale(.9);}
+    to{opacity:1;transform:scale(1);}
+  }
+  #lightbox-close{
+    position:fixed;
+    top:20px;right:24px;
+    font-size:1.4rem;
+    color:#fff;
+    cursor:pointer;
+    background:rgba(255,255,255,0.1);
+    border:none;
+    width:44px;height:44px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:.2s;
+    z-index:10000;
+  }
+  #lightbox-close:hover{background:rgba(255,107,0,0.4);}
 
   /* ====== VIDEO ====== */
   .video-wrap{
@@ -880,7 +936,8 @@
 <!-- ====== HEADER ====== -->
 <header>
   <a href="#" class="logo">
-    <span>3D</span> Print Idéias 🚀
+    <img src="mascote3dpi.png" alt="Mascote HERO" class="logo-mascot">
+    <img src="logo3dpi.png" alt="3D Print Idéias" style="height:42px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(255,107,0,0.4));">
   </a>
   <nav>
     <a href="#hero3d">HERO.3D</a>
@@ -928,9 +985,9 @@
   <!-- Hero visuals -->
   <div class="hero-visuals">
     <div class="hero-img-container">
-      <img class="hero-img-main" src="https://placehold.co/420x340/0a1020/ff6b00?text=Kit+Gabinete+A1+Pro" alt="Kit Gabinete A1 Professional Enclosure">
-      <img class="hero-img-secondary hi-1" src="https://placehold.co/200x140/070d1a/00b4ff?text=HERO.3D+AI" alt="HERO.3D AI">
-      <img class="hero-img-secondary hi-2" src="https://placehold.co/160x120/070d1a/7c3aed?text=3D+Print" alt="3D Print">
+      <img class="hero-img-main" src="baner3dpi.png" alt="3D Print Idéias Banner" style="width:min(520px,95%);border-radius:12px;">
+      <img class="hero-img-secondary hi-1" src="fotoa1.png" alt="HERO.3D AI">
+      <img class="hero-img-secondary hi-2" src="fotoc1.png" alt="3D Print Personalizado">
     </div>
   </div>
 </section>
@@ -990,7 +1047,7 @@
     <div class="reveal-right">
       <div class="mockup-wrap">
         <div class="mockup-glow"></div>
-        <img src="https://placehold.co/480x560/070d1a/00b4ff?text=HERO.3D+Interface+IA" alt="HERO.3D Interface">
+        <img src="fotoa2.png" alt="HERO.3D Interface">
       </div>
 
       <div class="ai-cards">
@@ -1046,27 +1103,23 @@
   </div>
   <div class="carousel-track">
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/00b4ff?text=HERO.3D+Screenshot+1" alt="HERO.3D">
+      <img src="fotoa1.png" alt="HERO.3D — Interface principal">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/7c3aed?text=Análise+IA+2" alt="Análise IA">
+      <img src="fotoa2.png" alt="HERO.3D — Infográfico completo">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/00b4ff?text=Bambu+Studio+3" alt="Bambu Studio">
+      <img src="fotoa3.png" alt="HERO.3D — Análise em uso">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/ff6b00?text=Parser+.3mf+4" alt="Parser 3mf">
+      <img src="fotoa4.png" alt="HERO.3D — Diagnóstico resultado">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/00ff88?text=Otimização+5" alt="Otimização">
-      <div class="card-overlay"></div>
-    </div>
-    <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/00b4ff?text=Resultado+6" alt="Resultado">
+      <img src="fotoa5.png" alt="HERO.3D — Print Optimizer ecossistema">
       <div class="card-overlay"></div>
     </div>
   </div>
@@ -1101,7 +1154,7 @@
     <!-- Imagem -->
     <div class="reveal-right">
       <div class="mockup-wrap">
-        <img src="https://placehold.co/480x400/0a1020/ff6b00?text=DIY+Enclosure+Bambu+A1" alt="DIY Enclosure">
+        <img src="fotob3.png" alt="DIY Enclosure">
       </div>
     </div>
 
@@ -1144,27 +1197,23 @@
   </div>
   <div class="carousel-track">
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Enclosure+Frente" alt="Enclosure Frente">
+      <img src="fotob1.png" alt="Enclosure — Frente">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/ff8c00?text=Lateral+Esquerda" alt="Lateral Esquerda">
+      <img src="fotob2.png" alt="Enclosure — 4 ângulos">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Lateral+Direita" alt="Lateral Direita">
+      <img src="fotob3.png" alt="Kit Gabinete A1 — Infográfico completo">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/ffb347?text=Superior+Direita" alt="Superior Direita">
+      <img src="fotob4.png" alt="Gabinete A1 — Construa você mesmo">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Detalhe+LED" alt="Detalhe LED">
-      <div class="card-overlay"></div>
-    </div>
-    <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/ff8c00?text=Setup+Completo" alt="Setup Completo">
+      <img src="fotob5.png" alt="Kit Gabinete A1 — Arquivos 3MF + PDF">
       <div class="card-overlay"></div>
     </div>
   </div>
@@ -1243,7 +1292,7 @@
 
     <div class="reveal-right">
       <div class="mockup-wrap">
-        <img src="https://placehold.co/480x380/0a1020/7c3aed?text=Impressões+3D+Personalizadas" alt="Impressões 3D Personalizadas">
+        <img src="fotoc3.png" alt="Impressões 3D Personalizadas">
       </div>
     </div>
   </div>
@@ -1256,27 +1305,23 @@
   </div>
   <div class="carousel-track">
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Batman+3D" alt="Batman 3D">
+      <img src="fotoc1.png" alt="Família Fluminense — fundo preto">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/a78bfa?text=Busto+Personalizado" alt="Busto">
+      <img src="fotoc2.png" alt="Família Fluminense — fundo preto v2">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Miniatura+Família" alt="Miniatura">
+      <img src="fotoc3.png" alt="Miniatura 3D — Família no pedestal">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/c4b5fd?text=Spitz+Bella" alt="Spitz">
+      <img src="fotoc4.png" alt="Spitz Bella — fundo preto">
       <div class="card-overlay"></div>
     </div>
     <div class="carousel-card">
-      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Decorativo+5" alt="Decorativo">
-      <div class="card-overlay"></div>
-    </div>
-    <div class="carousel-card">
-      <img src="https://placehold.co/340x240/070d1a/a78bfa?text=Showcase+6" alt="Showcase">
+      <img src="fotoc5.png" alt="Miniatura 3D — Spitz Bella renderizado">
       <div class="card-overlay"></div>
     </div>
   </div>
@@ -1315,7 +1360,7 @@
   <div class="footer-grid">
     <div>
       <div class="footer-logo">
-        <span>3D</span> Print Idéias 🚀
+        <img src="logo3dpi.png" alt="3D Print Idéias" style="height:50px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,107,0,0.3));">
       </div>
       <div class="footer-tagline">Imprima • Crie • Realize</div>
       <p style="color:var(--muted);font-size:.85rem;margin-bottom:20px;max-width:280px;">
@@ -1407,6 +1452,33 @@ function toggleMenu(){
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
 })();
 
+// Lightbox
+(function(){
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbClose = document.getElementById('lightbox-close');
+
+  document.querySelectorAll('.carousel-card').forEach(card=>{
+    card.addEventListener('click',function(){
+      const src = this.querySelector('img').src;
+      const alt = this.querySelector('img').alt;
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lb.classList.add('open');
+      document.body.style.overflow='hidden';
+    });
+  });
+
+  function closeLb(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+    lbImg.src='';
+  }
+  lbClose.addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+})();
+
 // Header scroll effect
 window.addEventListener('scroll',()=>{
   const h = document.querySelector('header');
@@ -1417,5 +1489,11 @@ window.addEventListener('scroll',()=>{
   }
 });
 </script>
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lightbox-close" title="Fechar (Esc)">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 </body>
 </html>
