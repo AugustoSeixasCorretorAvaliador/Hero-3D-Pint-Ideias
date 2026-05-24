@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Print Idéias 🚀 | Impressão 3D + IA | Niterói</title>
+<meta name="description" content="Transformando ideias em realidade com Impressão 3D + Inteligência Artificial. HERO.3D Print Optimizer, DIY Enclosure e produtos personalizados.">
+<meta property="og:title" content="3D Print Idéias 🚀 | Impressão 3D + IA">
+<meta property="og:description" content="Projetos personalizados, soluções maker e otimização inteligente para impressão 3D profissional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #030610;
+    --bg2: #070d1a;
+    --bg3: #0a1020;
+    --orange: #ff6b00;
+    --orange2: #ff8c00;
+    --blue: #00b4ff;
+    --purple: #7c3aed;
+    --green: #00ff88;
+    --text: #e8eaf0;
+    --muted: #7a8399;
+    --border: rgba(255,107,0,0.15);
+    --border-blue: rgba(0,180,255,0.2);
+    --glow-o: 0 0 30px rgba(255,107,0,0.4);
+    --glow-b: 0 0 30px rgba(0,180,255,0.3);
+    --glow-g: 0 0 20px rgba(0,255,136,0.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Exo 2',sans-serif;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+
+  /* GRID BG */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,107,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,0,0.03) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ====== HEADER ====== */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    background:rgba(3,6,16,0.85);
+    border-bottom:1px solid var(--border);
+    padding:0 5%;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.5rem;
+    font-weight:700;
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo span{color:var(--orange);}
+  nav{display:flex;align-items:center;gap:32px;}
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.9rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    transition:.3s;
+  }
+  nav a:hover{color:var(--orange);}
+  .btn-whatsapp{
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    color:#fff;
+    padding:10px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.05em;
+    transition:.3s;
+    white-space:nowrap;
+    box-shadow:0 4px 20px rgba(37,211,102,0.3);
+  }
+  .btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,0.5);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{display:block;width:25px;height:2px;background:var(--orange);border-radius:2px;transition:.3s;}
+  .mobile-menu{
+    display:none;
+    position:fixed;
+    top:70px;left:0;right:0;
+    background:rgba(3,6,16,0.98);
+    backdrop-filter:blur(20px);
+    padding:20px 5%;
+    border-bottom:1px solid var(--border);
+    z-index:99;
+    flex-direction:column;
+    gap:16px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{color:var(--text);text-decoration:none;font-weight:600;font-size:1rem;padding:8px 0;border-bottom:1px solid var(--border);}
+
+  /* ====== HERO ====== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    padding:120px 5% 80px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 50%, rgba(255,107,0,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0,180,255,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(124,58,237,0.06) 0%, transparent 60%);
+  }
+  .particles{position:absolute;inset:0;pointer-events:none;}
+  .particle{
+    position:absolute;
+    width:2px;height:2px;
+    background:var(--orange);
+    border-radius:50%;
+    opacity:0;
+    animation:float-particle linear infinite;
+  }
+  @keyframes float-particle{
+    0%{transform:translateY(100vh) translateX(0);opacity:0;}
+    10%{opacity:.8;}
+    90%{opacity:.4;}
+    100%{transform:translateY(-100px) translateX(40px);opacity:0;}
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+  }
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(255,107,0,0.1);
+    border:1px solid rgba(255,107,0,0.3);
+    border-radius:30px;
+    padding:6px 16px;
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--orange);
+    margin-bottom:24px;
+    animation:fadeUp .6s ease both;
+  }
+  .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.6);}50%{box-shadow:0 0 0 8px rgba(255,107,0,0);}}
+  h1{
+    font-family:'Rajdhani',sans-serif;
+    font-size:clamp(2.2rem,5vw,4rem);
+    font-weight:700;
+    line-height:1.1;
+    margin-bottom:20px;
+    animation:fadeUp .7s .1s ease both;
+  }
+  h1 .accent{
+    background:linear-gradient(135deg,var(--orange),var(--orange2),#ffb347);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero-sub{
+    font-size:1.15rem;
+    color:var(--muted);
+    margin-bottom:40px;
+    max-width:560px;
+    animation:fadeUp .7s .2s ease both;
+    font-weight:300;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    animation:fadeUp .7s .3s ease both;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--orange),var(--orange2));
+    color:#fff;
+    padding:14px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:1rem;
+    transition:.3s;
+    box-shadow:var(--glow-o);
+    letter-spacing:.03em;
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,107,0,0.5);}
+  .btn-outline{
+    background:transparent;
+    color:var(--blue);
+    padding:14px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:1rem;
+    transition:.3s;
+    border:1px solid rgba(0,180,255,0.4);
+    letter-spacing:.03em;
+  }
+  .btn-outline:hover{background:rgba(0,180,255,0.1);border-color:var(--blue);transform:translateY(-3px);}
+
+  /* hero float images */
+  .hero-visuals{
+    position:absolute;
+    right:0;top:0;bottom:0;
+    width:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .hero-img-container{
+    position:relative;
+    width:100%;
+    height:100%;
+  }
+  .hero-img-main{
+    position:absolute;
+    right:5%;
+    top:50%;
+    transform:translateY(-50%);
+    width:min(420px,90%);
+    border-radius:20px;
+    border:1px solid rgba(255,107,0,0.2);
+    box-shadow:0 0 60px rgba(255,107,0,0.15),0 0 120px rgba(0,180,255,0.08);
+    animation:float 6s ease-in-out infinite;
+    object-fit:cover;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(-50%) translateY(0);}
+    50%{transform:translateY(-50%) translateY(-16px);}
+  }
+  .hero-img-secondary{
+    position:absolute;
+    width:200px;
+    border-radius:12px;
+    border:1px solid rgba(0,180,255,0.2);
+    box-shadow:var(--glow-b);
+    object-fit:cover;
+  }
+  .hi-1{top:15%;right:55%;animation:float 7s 1s ease-in-out infinite;}
+  .hi-2{bottom:15%;right:8%;width:160px;animation:float 5s 2s ease-in-out infinite;}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* ====== SECTIONS ====== */
+  section{position:relative;padding:100px 5%;overflow:hidden;}
+  .section-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.75rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--orange);
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-label::before{content:'//';opacity:.5;}
+  h2{
+    font-family:'Rajdhani',sans-serif;
+    font-size:clamp(1.8rem,4vw,3rem);
+    font-weight:700;
+    line-height:1.1;
+    margin-bottom:16px;
+  }
+  h2 .o{color:var(--orange);}
+  h2 .b{color:var(--blue);}
+
+  /* ====== HERO.3D SECTION ====== */
+  .hero3d{
+    background:linear-gradient(135deg,rgba(7,13,26,0.9),rgba(10,16,32,0.95));
+  }
+  .hero3d::before{
+    content:'';
+    position:absolute;
+    top:-100px;left:-100px;right:-100px;
+    height:300px;
+    background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(0,180,255,0.07),transparent);
+    pointer-events:none;
+  }
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .two-col.reverse{direction:rtl;}
+  .two-col.reverse > *{direction:ltr;}
+
+  .feature-list{
+    list-style:none;
+    margin:24px 0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .feature-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:12px 16px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:10px;
+    font-size:.95rem;
+    transition:.3s;
+  }
+  .feature-list li:hover{background:rgba(255,107,0,0.05);border-color:rgba(255,107,0,0.2);}
+  .feature-list .icon{font-size:1.2rem;min-width:24px;}
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:24px;
+  }
+  .stat-card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--border-blue);
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+  }
+  .stat-card::after{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  }
+  .stat-card:hover{transform:translateY(-4px);box-shadow:var(--glow-b);}
+  .stat-card .val{
+    font-family:'Rajdhani',sans-serif;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--blue);
+    display:block;
+  }
+  .stat-card .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+
+  /* mockup visual */
+  .mockup-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .mockup-wrap img{
+    width:100%;
+    max-width:480px;
+    border-radius:16px;
+    border:1px solid rgba(0,180,255,0.2);
+    box-shadow:0 0 60px rgba(0,180,255,0.1),0 40px 80px rgba(0,0,0,0.4);
+  }
+  .mockup-glow{
+    position:absolute;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(0,180,255,0.12),transparent 70%);
+    pointer-events:none;
+    animation:pulse-glow 4s ease-in-out infinite;
+  }
+  @keyframes pulse-glow{
+    0%,100%{transform:scale(1);opacity:.8;}
+    50%{transform:scale(1.2);opacity:.4;}
+  }
+
+  .ai-cards{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+  }
+  .ai-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:linear-gradient(135deg,rgba(0,180,255,0.06),rgba(124,58,237,0.06));
+    border:1px solid rgba(0,180,255,0.15);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:.9rem;
+    transition:.3s;
+  }
+  .ai-card:hover{border-color:rgba(0,180,255,0.4);background:rgba(0,180,255,0.08);}
+  .ai-card-icon{
+    width:36px;height:36px;
+    border-radius:8px;
+    background:rgba(0,180,255,0.1);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;
+    flex-shrink:0;
+  }
+
+  /* antes/depois */
+  .before-after{
+    background:rgba(0,0,0,0.3);
+    border:1px solid rgba(255,107,0,0.15);
+    border-radius:16px;
+    padding:24px;
+    margin:24px 0;
+  }
+  .ba-title{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.75rem;
+    color:var(--muted);
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .ba-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:12px;
+  }
+  .ba-before,.ba-after{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+  }
+  .ba-before{background:rgba(255,50,50,0.08);border:1px solid rgba(255,50,50,0.2);}
+  .ba-after{background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);}
+  .ba-val{
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.6rem;
+    font-weight:700;
+    display:block;
+  }
+  .ba-before .ba-val{color:#ff5050;}
+  .ba-after .ba-val{color:var(--green);}
+  .ba-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+  .ba-arrow{font-size:1.2rem;color:var(--orange);}
+  .reduction-badge{
+    background:linear-gradient(135deg,rgba(0,255,136,0.15),rgba(0,255,136,0.05));
+    border:1px solid rgba(0,255,136,0.3);
+    border-radius:10px;
+    padding:10px 16px;
+    text-align:center;
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.1rem;
+    color:var(--green);
+    font-weight:700;
+  }
+
+  /* ====== CARROSSEL ====== */
+  .carousel-section{
+    padding:40px 0 60px;
+    background:rgba(0,0,0,0.2);
+  }
+  .carousel-title{
+    padding:0 5%;
+    margin-bottom:24px;
+  }
+  .carousel-track{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding:10px 5% 20px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(255,107,0,0.3) transparent;
+  }
+  .carousel-track::-webkit-scrollbar{height:4px;}
+  .carousel-track::-webkit-scrollbar-track{background:transparent;}
+  .carousel-track::-webkit-scrollbar-thumb{background:rgba(255,107,0,0.3);border-radius:2px;}
+  .carousel-card{
+    flex-shrink:0;
+    width:340px;
+    height:240px;
+    border-radius:16px;
+    overflow:hidden;
+    scroll-snap-align:start;
+    position:relative;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:.4s;
+    cursor:pointer;
+  }
+  .carousel-card:hover{transform:scale(1.03);box-shadow:0 20px 60px rgba(255,107,0,0.2);border-color:rgba(255,107,0,0.3);}
+  .carousel-card img{
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:.4s;
+  }
+  .carousel-card:hover img{transform:scale(1.08);}
+  .carousel-card .card-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(3,6,16,0.7),transparent);
+  }
+
+  /* ====== VIDEO ====== */
+  .video-wrap{
+    display:flex;
+    justify-content:center;
+    padding:40px 5%;
+  }
+  .video-container{
+    width:100%;
+    max-width:400px;
+    aspect-ratio:9/16;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:var(--glow-o);
+    position:relative;
+  }
+  .video-container.wide{
+    max-width:800px;
+    aspect-ratio:16/9;
+  }
+  .video-container iframe{
+    width:100%;height:100%;
+    border:none;
+  }
+
+  /* ====== CTA BLOCK ====== */
+  .cta-block{
+    text-align:center;
+    padding:60px 5%;
+    background:linear-gradient(135deg,rgba(255,107,0,0.04),rgba(0,180,255,0.04));
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .cta-block p{color:var(--muted);margin-bottom:24px;font-size:1.05rem;}
+
+  /* ====== DIY SECTION ====== */
+  .diy-section{
+    background:var(--bg2);
+  }
+  .diy-section::before{
+    content:'';
+    position:absolute;
+    bottom:-100px;right:-100px;
+    width:400px;height:400px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,107,0,0.06),transparent 70%);
+    pointer-events:none;
+  }
+  .badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:20px 0;
+  }
+  .badge{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:30px;
+    padding:6px 14px;
+    font-size:.8rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--muted);
+    transition:.3s;
+  }
+  .badge:hover{background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.3);color:var(--orange);}
+  .contact-info{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .contact-info a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.95rem;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .contact-info a:hover{color:var(--orange);}
+
+  /* ====== PERSONALIZADOS ====== */
+  .custom-section{
+    background:var(--bg3);
+  }
+  .custom-section::before{
+    content:'';
+    position:absolute;
+    top:0;left:50%;transform:translateX(-50%);
+    width:600px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--orange),transparent);
+  }
+  .creative-cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin:24px 0;
+  }
+  .creative-card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;
+    padding:16px;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+  }
+  .creative-card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--orange),var(--orange2));
+    transform:scaleX(0);
+    transition:.3s;
+    transform-origin:left;
+  }
+  .creative-card:hover::before{transform:scaleX(1);}
+  .creative-card:hover{background:rgba(255,107,0,0.04);border-color:rgba(255,107,0,0.15);}
+  .creative-card .icon{font-size:1.5rem;margin-bottom:8px;}
+  .creative-card h4{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;margin-bottom:4px;}
+  .creative-card p{font-size:.82rem;color:var(--muted);}
+
+  /* mini CTA */
+  .mini-ctas{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:20px;
+  }
+  .mini-cta-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:.9rem;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+
+  /* ====== FOOTER ====== */
+  footer{
+    background:var(--bg);
+    border-top:1px solid var(--border);
+    padding:60px 5% 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  footer::before{
+    content:'';
+    position:absolute;
+    bottom:0;left:50%;transform:translateX(-50%);
+    width:800px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,107,0,0.3),transparent);
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:40px;
+  }
+  .footer-logo{
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.8rem;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  .footer-logo span{color:var(--orange);}
+  .footer-tagline{
+    color:var(--muted);
+    font-size:.9rem;
+    margin-bottom:20px;
+  }
+  .footer-social{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .social-btn{
+    width:40px;height:40px;
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    text-decoration:none;
+    font-size:1rem;
+    transition:.3s;
+    color:var(--muted);
+  }
+  .social-btn:hover{background:rgba(255,107,0,0.1);border-color:var(--orange);color:var(--orange);transform:translateY(-3px);}
+  .footer-col h4{
+    font-family:'Rajdhani',sans-serif;
+    font-size:1rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--orange);
+    margin-bottom:16px;
+  }
+  .footer-col a{
+    display:block;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.88rem;
+    margin-bottom:10px;
+    transition:.3s;
+  }
+  .footer-col a:hover{color:var(--text);}
+  .footer-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.05);
+    color:var(--muted);
+    font-size:.82rem;
+  }
+
+  /* ====== FLOATING WHATSAPP ====== */
+  .float-wa{
+    position:fixed;
+    bottom:24px;right:24px;
+    z-index:200;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    color:#fff;
+    width:60px;height:60px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;
+    text-decoration:none;
+    box-shadow:0 8px 30px rgba(37,211,102,0.5);
+    transition:.3s;
+    animation:bounce-wa 3s 2s ease-in-out infinite;
+  }
+  .float-wa:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(37,211,102,0.7);}
+  @keyframes bounce-wa{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+  }
+
+  /* ====== REVEAL ANIMATION ====== */
+  .reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .reveal-left{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal-left.visible{opacity:1;transform:translateX(0);}
+  .reveal-right{
+    opacity:0;
+    transform:translateX(40px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal-right.visible{opacity:1;transform:translateX(0);}
+
+  /* ====== DIVIDER ====== */
+  .divider{
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,107,0,0.2),transparent);
+    margin:0;
+  }
+
+  /* ====== SECTION HEADER ====== */
+  .section-header{
+    margin-bottom:48px;
+  }
+  .section-header p{
+    color:var(--muted);
+    max-width:600px;
+    font-size:1.05rem;
+  }
+
+  /* ====== QUOTE BLOCK ====== */
+  .quote-block{
+    background:linear-gradient(135deg,rgba(255,107,0,0.06),rgba(0,0,0,0.2));
+    border-left:3px solid var(--orange);
+    border-radius:0 10px 10px 0;
+    padding:16px 20px;
+    margin:20px 0;
+    font-style:italic;
+    color:var(--muted);
+    font-size:.95rem;
+  }
+
+  /* ====== ECOSYSTEM TAG ====== */
+  .ecosystem-note{
+    background:rgba(124,58,237,0.08);
+    border:1px solid rgba(124,58,237,0.2);
+    border-radius:10px;
+    padding:16px 20px;
+    font-size:.9rem;
+    color:var(--muted);
+    margin-top:20px;
+  }
+  .ecosystem-note strong{color:#a78bfa;}
+
+  /* ====== LOADING BAR ====== */
+  #loading-bar{
+    position:fixed;
+    top:0;left:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--orange),var(--blue));
+    z-index:9999;
+    width:0;
+    transition:width .3s ease;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media(max-width:900px){
+    nav{display:none;}
+    .hamburger{display:flex;}
+    .hero-visuals{display:none;}
+    .hero-content{max-width:100%;}
+    .two-col{grid-template-columns:1fr;gap:40px;}
+    .two-col.reverse{direction:ltr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .creative-cards{grid-template-columns:1fr;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:600px){
+    header{padding:0 4%;}
+    section{padding:70px 4%;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-ctas{flex-direction:column;}
+    .btn-primary,.btn-outline{text-align:center;}
+    .ba-row{flex-direction:column;gap:8px;}
+    .ba-arrow{transform:rotate(90deg);}
+    .video-container{max-width:100%;}
+    .carousel-card{width:280px;height:200px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading bar -->
+<div id="loading-bar"></div>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/5521985653880" target="_blank" rel="noopener" class="float-wa" title="Falar no WhatsApp">💬</a>
+
+<!-- ====== HEADER ====== -->
+<header>
+  <a href="#" class="logo">
+    <span>3D</span> Print Idéias 🚀
+  </a>
+  <nav>
+    <a href="#hero3d">HERO.3D</a>
+    <a href="#diy">DIY Enclosure</a>
+    <a href="#custom">Impressão 3D</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 Falar no WhatsApp</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero3d" onclick="toggleMenu()">HERO.3D</a>
+  <a href="#diy" onclick="toggleMenu()">DIY Enclosure</a>
+  <a href="#custom" onclick="toggleMenu()">Impressão 3D</a>
+  <a href="#contato" onclick="toggleMenu()">Contato</a>
+  <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp" style="text-align:center">🚀 Falar no WhatsApp</a>
+</div>
+
+<!-- ====== HERO SECTION ====== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🚀 Impressão 3D + Inteligência Artificial</div>
+    <h1>
+      Transformando ideias em<br>
+      <span class="accent">realidade com Impressão 3D + IA</span>
+    </h1>
+    <p class="hero-sub">
+      Projetos personalizados, soluções maker e otimização inteligente para impressão 3D profissional.
+    </p>
+    <div class="hero-ctas">
+      <a href="#hero3d" class="btn-primary">🚀 Conhecer Projetos</a>
+      <a href="#hero3d" class="btn-outline">⚡ Ver HERO.3D</a>
+    </div>
+  </div>
+
+  <!-- Hero visuals -->
+  <div class="hero-visuals">
+    <div class="hero-img-container">
+      <img class="hero-img-main" src="https://placehold.co/420x340/0a1020/ff6b00?text=Kit+Gabinete+A1+Pro" alt="Kit Gabinete A1 Professional Enclosure">
+      <img class="hero-img-secondary hi-1" src="https://placehold.co/200x140/070d1a/00b4ff?text=HERO.3D+AI" alt="HERO.3D AI">
+      <img class="hero-img-secondary hi-2" src="https://placehold.co/160x120/070d1a/7c3aed?text=3D+Print" alt="3D Print">
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====== SEÇÃO 1: HERO.3D ====== -->
+<section class="hero3d" id="hero3d">
+  <div class="two-col">
+    <!-- Texto -->
+    <div class="reveal-left">
+      <div class="section-label">Seção 01 — Tecnologia IA</div>
+      <h2>🚀 <span class="b">HERO.3D</span> Print<br><span class="o">Optimizer</span></h2>
+      <p style="color:var(--muted);font-size:1rem;margin-bottom:8px;">
+        <strong style="color:var(--blue)">A IA GPT-Vision que otimiza suas impressões 3D.</strong>
+      </p>
+      <p style="color:var(--muted);font-size:.95rem;margin-bottom:4px;">
+        Você está imprimindo mais lento do que deveria… e ainda perdendo material, tempo e qualidade nas peças.
+      </p>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:16px;">
+        O HERO.3D combina <strong style="color:var(--text)">IA Vision</strong>, análise técnica inteligente e parser real de arquivos <strong style="color:var(--blue)">.3mf</strong> para gerar ajustes automáticos no Bambu Studio.
+      </p>
+
+      <ul class="feature-list">
+        <li><span class="icon">🔥</span><span>Envie screenshots + .3mf e receba análise completa</span></li>
+        <li><span class="icon">⚡</span><span>Receba recomendações inteligentes em segundos</span></li>
+        <li><span class="icon">📉</span><span>Reduza tempo de impressão e desperdício de material</span></li>
+        <li><span class="icon">📈</span><span>Aumente produtividade e melhore a qualidade final</span></li>
+      </ul>
+
+      <div class="before-after">
+        <div class="ba-title">// Resultado real — Análise HERO.3D</div>
+        <div class="ba-row">
+          <div class="ba-before">
+            <span class="ba-val">7h12</span>
+            <div class="ba-label">Antes</div>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-after">
+            <span class="ba-val">2h57</span>
+            <div class="ba-label">Depois</div>
+          </div>
+        </div>
+        <div class="reduction-badge">📉 Redução de 58% no tempo total</div>
+      </div>
+
+      <div class="quote-block">
+        "Pare de configurar impressões no chute ou seguindo dicas aleatórias da internet."
+      </div>
+
+      <div class="ecosystem-note">
+        <strong>🌐 Ecossistema HERO completo:</strong> além do HERO.3D, o ecossistema contém ferramentas inteligentes para automação, prospecção, análise e produtividade integrada ao WhatsApp.
+      </div>
+    </div>
+
+    <!-- Visual / mockup -->
+    <div class="reveal-right">
+      <div class="mockup-wrap">
+        <div class="mockup-glow"></div>
+        <img src="https://placehold.co/480x560/070d1a/00b4ff?text=HERO.3D+Interface+IA" alt="HERO.3D Interface">
+      </div>
+
+      <div class="ai-cards">
+        <div class="ai-card">
+          <div class="ai-card-icon">👁</div>
+          <div>
+            <strong>Análise Visual Inteligente</strong><br>
+            <span style="color:var(--muted);font-size:.82rem">GPT-Vision processa suas screenshots com precisão técnica</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-icon">📦</div>
+          <div>
+            <strong>Parser .3mf Técnico</strong><br>
+            <span style="color:var(--muted);font-size:.82rem">Leitura real dos dados de impressão do arquivo original</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-icon">⚡</div>
+          <div>
+            <strong>Ajustes Automáticos</strong><br>
+            <span style="color:var(--muted);font-size:.82rem">Recomendações precisas prontas para aplicar no Bambu Studio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="val">-58%</span>
+          <div class="lbl">Tempo Reduzido</div>
+        </div>
+        <div class="stat-card">
+          <span class="val">R$29,90</span>
+          <div class="lbl">Por mês</div>
+        </div>
+        <div class="stat-card">
+          <span class="val">7 dias</span>
+          <div class="lbl">Grátis para testar</div>
+        </div>
+        <div class="stat-card">
+          <span class="val">9+</span>
+          <div class="lbl">Ferramentas HERO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Carrossel HERO.3D -->
+<div class="carousel-section">
+  <div class="carousel-title reveal">
+    <div class="section-label">// Galeria HERO.3D</div>
+  </div>
+  <div class="carousel-track">
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/00b4ff?text=HERO.3D+Screenshot+1" alt="HERO.3D">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/7c3aed?text=Análise+IA+2" alt="Análise IA">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/00b4ff?text=Bambu+Studio+3" alt="Bambu Studio">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/ff6b00?text=Parser+.3mf+4" alt="Parser 3mf">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/00ff88?text=Otimização+5" alt="Otimização">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/00b4ff?text=Resultado+6" alt="Resultado">
+      <div class="card-overlay"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Vídeo HERO.3D -->
+<div class="video-wrap reveal">
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/i65m6S26bbQ"
+      title="HERO.3D Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+<!-- CTA HERO.3D -->
+<div class="cta-block reveal">
+  <p>Pare de perder tempo e material. Deixe a IA otimizar suas impressões agora.</p>
+  <a href="https://youtu.be/C69eVfmu9dk?si=ejxFdCKyZvNU7ydy" target="_blank" rel="noopener" class="btn-primary" style="font-size:1.1rem;padding:16px 36px;">
+    🚀 Quero conhecer o HERO.3D
+  </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- ====== SEÇÃO 2: DIY ENCLOSURE ====== -->
+<section class="diy-section" id="diy">
+  <div class="two-col reverse">
+    <!-- Imagem -->
+    <div class="reveal-right">
+      <div class="mockup-wrap">
+        <img src="https://placehold.co/480x400/0a1020/ff6b00?text=DIY+Enclosure+Bambu+A1" alt="DIY Enclosure">
+      </div>
+    </div>
+
+    <!-- Texto -->
+    <div class="reveal-left">
+      <div class="section-label">Seção 02 — Maker Workshop</div>
+      <h2>🚀 DIY Enclosure para<br><span class="o">Impressora 3D</span></h2>
+      <p style="color:var(--muted);font-size:.95rem;margin-bottom:20px;">
+        Neste projeto mostramos a construção de um enclosure DIY funcional para impressão 3D com resultado profissional.
+      </p>
+
+      <ul class="feature-list">
+        <li><span class="icon">🌡️</span><span>Melhor controle térmico da câmara de impressão</span></li>
+        <li><span class="icon">🛡️</span><span>Menos poeira e partículas nos componentes</span></li>
+        <li><span class="icon">⚙️</span><span>Mais estabilidade nas impressões longas</span></li>
+        <li><span class="icon">🏭</span><span>Visual industrial e profissional ao seu setup</span></li>
+      </ul>
+
+      <div class="badges">
+        <span class="badge">DIY</span>
+        <span class="badge">Maker</span>
+        <span class="badge">Bambu Lab</span>
+        <span class="badge">Impressão 3D</span>
+        <span class="badge">Projeto Completo</span>
+      </div>
+
+      <div class="contact-info" id="contato">
+        <a href="#">📍 Icaraí – Niterói, RJ</a>
+        <a href="mailto:3dprintideias3d@gmail.com">📧 3dprintideias3d@gmail.com</a>
+        <a href="https://wa.me/5521985653880" target="_blank">💬 WhatsApp direto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Carrossel DIY -->
+<div class="carousel-section">
+  <div class="carousel-title reveal">
+    <div class="section-label">// Galeria DIY Enclosure</div>
+  </div>
+  <div class="carousel-track">
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Enclosure+Frente" alt="Enclosure Frente">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/ff8c00?text=Lateral+Esquerda" alt="Lateral Esquerda">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Lateral+Direita" alt="Lateral Direita">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/ffb347?text=Superior+Direita" alt="Superior Direita">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/ff6b00?text=Detalhe+LED" alt="Detalhe LED">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/ff8c00?text=Setup+Completo" alt="Setup Completo">
+      <div class="card-overlay"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Vídeo DIY -->
+<div class="video-wrap reveal">
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/i65m6S26bbQ"
+      title="DIY Enclosure Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+<!-- CTA DIY -->
+<div class="cta-block reveal">
+  <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.6rem;margin-bottom:12px;">Kit Gabinete A1 Professional Enclosure 2026</h3>
+  <p>Projeto 100% digital com PDF completo + 25 arquivos 3MF prontos para imprimir na sua Bambu A1.</p>
+  <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank" rel="noopener" class="btn-primary" style="font-size:1.1rem;padding:16px 36px;background:linear-gradient(135deg,var(--orange),#e65c00);">
+    🛒 Ver Projeto Completo
+  </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- ====== SEÇÃO 3: PERSONALIZADOS ====== -->
+<section class="custom-section" id="custom">
+  <div class="section-header reveal" style="text-align:center;">
+    <div class="section-label" style="justify-content:center">Seção 03 — Criação Personalizada</div>
+    <h2 style="text-align:center">🚀 Bem-vindo à <span class="o">3D Print Idéias!</span></h2>
+    <p style="margin:0 auto;text-align:center">
+      Transformamos criatividade em realidade através da impressão 3D personalizada.<br>
+      Aqui, suas ideias ganham forma com qualidade, inovação e acabamento premium.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <div class="reveal-left">
+      <div class="creative-cards">
+        <div class="creative-card">
+          <div class="icon">🎨</div>
+          <h4>Peças Decorativas</h4>
+          <p>Esculturas, bustos, itens de decoração únicos e exclusivos</p>
+        </div>
+        <div class="creative-card">
+          <div class="icon">🔬</div>
+          <h4>Protótipos</h4>
+          <p>Valide sua ideia antes de escalar. Rápido e econômico</p>
+        </div>
+        <div class="creative-card">
+          <div class="icon">🎁</div>
+          <h4>Presentes Personalizados</h4>
+          <p>Miniaturas de pessoas, animais e personagens especiais</p>
+        </div>
+        <div class="creative-card">
+          <div class="icon">⚡</div>
+          <h4>Soluções Sob Medida</h4>
+          <p>Peças funcionais, suportes, encaixes e componentes</p>
+        </div>
+      </div>
+
+      <p style="color:var(--muted);font-size:.95rem;margin:20px 0;font-style:italic;">
+        "Suas ideias miniaturizadas com criatividade, tecnologia e acabamento profissional."
+      </p>
+
+      <div class="mini-ctas">
+        <div class="mini-cta-item">🚀 <strong>HERO.3D Print Optimizer</strong> — IA para otimizar cada impressão</div>
+        <div class="mini-cta-item">💡 <strong>Mais tempo criando ideias</strong> — menos tempo configurando</div>
+        <div class="mini-cta-item">🎯 <strong>Menos tempo sofrendo nos ajustes</strong> — mais resultado final</div>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div class="mockup-wrap">
+        <img src="https://placehold.co/480x380/0a1020/7c3aed?text=Impressões+3D+Personalizadas" alt="Impressões 3D Personalizadas">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Carrossel Personalizados -->
+<div class="carousel-section">
+  <div class="carousel-title reveal">
+    <div class="section-label">// Galeria Personalizados</div>
+  </div>
+  <div class="carousel-track">
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Batman+3D" alt="Batman 3D">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/a78bfa?text=Busto+Personalizado" alt="Busto">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Miniatura+Família" alt="Miniatura">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/c4b5fd?text=Spitz+Bella" alt="Spitz">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/0a1020/7c3aed?text=Decorativo+5" alt="Decorativo">
+      <div class="card-overlay"></div>
+    </div>
+    <div class="carousel-card">
+      <img src="https://placehold.co/340x240/070d1a/a78bfa?text=Showcase+6" alt="Showcase">
+      <div class="card-overlay"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Instagram Reel -->
+<div class="video-wrap reveal">
+  <div class="video-container wide">
+    <iframe
+      src="https://www.instagram.com/reel/DYdMaVSxfF3/embed"
+      title="Instagram Reel 3D Print Idéias"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+<!-- CTA Final -->
+<div class="cta-block reveal">
+  <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.8rem;margin-bottom:12px;">Pronto para transformar suas ideias em realidade?</h3>
+  <p>Veja nossos projetos personalizados e descubra o que a impressão 3D pode fazer por você.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://www.instagram.com/reel/DYdMaVSxfF3/?igsh=MWhjbG9vZWkwMTVlaA==" target="_blank" rel="noopener" class="btn-primary" style="font-size:1.05rem;padding:14px 32px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);">
+      🎨 Ver Projetos Personalizados
+    </a>
+    <a href="https://wa.me/5521985653880" target="_blank" rel="noopener" class="btn-whatsapp" style="padding:14px 32px;font-size:1.05rem;">
+      💬 Solicitar Orçamento
+    </a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <span>3D</span> Print Idéias 🚀
+      </div>
+      <div class="footer-tagline">Imprima • Crie • Realize</div>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:20px;max-width:280px;">
+        Impressão 3D profissional, IA aplicada à manufatura e soluções maker em Niterói, RJ.
+      </p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="Instagram">📷</a>
+        <a href="https://wa.me/5521985653880" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+        <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube">▶️</a>
+        <a href="mailto:3dprintideias3d@gmail.com" class="social-btn" title="Email">📧</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <a href="#hero3d">HERO.3D Optimizer</a>
+      <a href="#diy">DIY Enclosure</a>
+      <a href="#custom">Impressão Personalizada</a>
+      <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank">Hotmart Store</a>
+    </div>
+    <div class="footer-col">
+      <h4>HERO.IA</h4>
+      <a href="#">HERO.3D Print</a>
+      <a href="#">Copiloto de Vendas</a>
+      <a href="#">Disparador WPP</a>
+      <a href="#">Prospect Leads</a>
+      <a href="#">Simulador Crédito</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="#">📍 Icaraí – Niterói, RJ</a>
+      <a href="mailto:3dprintideias3d@gmail.com">📧 3dprintideias3d@gmail.com</a>
+      <a href="https://wa.me/5521985653880" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 3D Print Idéias. Todos os direitos reservados.</span>
+    <span style="color:var(--orange)">Imprima • Crie • Realize 🚀</span>
+  </div>
+</footer>
+
+<script>
+// Loading bar
+(function(){
+  const bar = document.getElementById('loading-bar');
+  let w = 0;
+  const t = setInterval(()=>{
+    w += Math.random()*20;
+    if(w>=90)clearInterval(t);
+    bar.style.width = Math.min(w,90)+'%';
+  },200);
+  window.addEventListener('load',()=>{
+    bar.style.width='100%';
+    setTimeout(()=>{bar.style.opacity='0';},400);
+  });
+})();
+
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Particles
+(function(){
+  const container = document.getElementById('particles');
+  const colors = ['#ff6b00','#00b4ff','#7c3aed','#00ff88'];
+  for(let i=0;i<24;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random()*100+'%';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration = (8+Math.random()*12)+'s';
+    p.style.animationDelay = (Math.random()*12)+'s';
+    p.style.width = p.style.height = (1+Math.random()*3)+'px';
+    container.appendChild(p);
+  }
+})();
+
+// Intersection Observer for reveals
+(function(){
+  const opts = {threshold:0.12,rootMargin:'0px 0px -60px 0px'};
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  },opts);
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
+})();
+
+// Header scroll effect
+window.addEventListener('scroll',()=>{
+  const h = document.querySelector('header');
+  if(window.scrollY>80){
+    h.style.background='rgba(3,6,16,0.97)';
+  } else {
+    h.style.background='rgba(3,6,16,0.85)';
+  }
+});
+</script>
+</body>
+</html>
