@@ -99,6 +99,20 @@
     transition:.3s;
   }
   nav a:hover{color:var(--orange);}
+  .btn-hotmart{
+    background:linear-gradient(135deg,#e8321a,#c0392b);
+    color:#fff;
+    padding:10px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.05em;
+    transition:.3s;
+    white-space:nowrap;
+    box-shadow:0 4px 20px rgba(232,50,26,0.35);
+  }
+  .btn-hotmart:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,50,26,0.55);}
   .btn-whatsapp{
     background:linear-gradient(135deg,#25D366,#128C7E);
     color:#fff;
@@ -240,42 +254,8 @@
   }
   .btn-outline:hover{background:rgba(0,180,255,0.1);border-color:var(--blue);transform:translateY(-3px);}
 
-  /* banner oscilante acima do badge */
-  .hero-banner-float{
-    display:block;
-    width:min(480px,100%);
-    margin-bottom:28px;
-    border-radius:12px;
-    animation:float-banner 5s ease-in-out infinite;
-    filter:drop-shadow(0 8px 24px rgba(255,107,0,0.25));
-  }
-  @keyframes float-banner{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-  }
-
-  /* crossfade fotoc1/fotoc2 sobre fotoa1 */
-  .hi-crossfade{
-    position:absolute;
-    top:8%;
-    right:52%;
-    width:190px;
-    border-radius:12px;
-    border:1px solid rgba(0,180,255,0.25);
-    box-shadow:var(--glow-b);
-    object-fit:cover;
-  }
-  .hi-crossfade img{
-    position:absolute;
-    top:0;left:0;
-    width:100%;
-    border-radius:12px;
-    object-fit:cover;
-    transition:opacity 1s ease-in-out;
-  }
-  .hi-crossfade img.fade-hidden{opacity:0;}
-  .hi-crossfade img.fade-visible{opacity:1;}
-  .hi-crossfade{animation:float 7s 0.5s ease-in-out infinite;}
+  /* hero float images */
+  .hero-visuals{
     position:absolute;
     right:0;top:0;bottom:0;
     width:50%;
@@ -283,7 +263,11 @@
     align-items:center;
     justify-content:center;
     pointer-events:none;
-    overflow:hidden;
+    overflow:visible;
+  }
+  @keyframes float-banner{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
   }
   .hero-img-container{
     position:relative;
@@ -571,7 +555,7 @@
     inset:0;
     background:linear-gradient(to top,rgba(3,6,16,0.7),transparent);
   }
-  .carousel-card{cursor:zoom-in;}
+  .carousel-card{cursor:zoom-in;pointer-events:all;}
 
   /* ====== LIGHTBOX ====== */
   #lightbox{
@@ -979,6 +963,7 @@
     <a href="#custom">Impressão 3D</a>
     <a href="#contato">Contato</a>
   </nav>
+  <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank" rel="noopener" class="btn-hotmart">🛒 Hotmart</a>
   <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 Falar no WhatsApp</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1002,7 +987,7 @@
   <div class="particles" id="particles"></div>
 
   <div class="hero-content">
-    <img src="baner3dpi.png" alt="3D Print Idéias" class="hero-banner-float">
+    <img src="baner3dpi.png" alt="3D Print Idéias" style="width:min(460px,100%);margin-bottom:28px;border-radius:12px;display:block;animation:float-banner 5s ease-in-out infinite;filter:drop-shadow(0 8px 24px rgba(255,107,0,0.25));">
     <div class="hero-badge">🚀 Impressão 3D + Inteligência Artificial</div>
     <h1>
       Transformando ideias em<br>
@@ -1020,11 +1005,21 @@
   <!-- Hero visuals -->
   <div class="hero-visuals">
     <div class="hero-img-container">
+      <!-- foto principal: fotoa1 centralizada -->
       <img class="hero-img-main" src="fotoa1.png" alt="HERO.3D Print Optimizer">
-      <!-- crossfade fotoc1 / fotoc2 acima da principal -->
-      <div class="hi-crossfade" id="hcf" style="height:240px;">
-        <img src="fotoc1.png" alt="Personalizado 1" class="fade-visible" id="hcf-a">
-        <img src="fotoc2.png" alt="Personalizado 2" class="fade-hidden" id="hcf-b">
+      <!-- crossfade fotoc1/fotoc2 sobre a principal, posicionadas corretamente -->
+      <div id="hcf" style="
+        position:absolute;
+        top:18%;left:4%;
+        width:180px;height:220px;
+        border-radius:12px;
+        border:1px solid rgba(0,180,255,0.25);
+        box-shadow:0 0 20px rgba(0,180,255,0.2);
+        overflow:hidden;
+        animation:float 7s 0.5s ease-in-out infinite;
+      ">
+        <img id="hcf-a" src="fotoc1.png" alt="Personalizado 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;transition:opacity 1s ease-in-out;opacity:1;">
+        <img id="hcf-b" src="fotoc2.png" alt="Personalizado 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;transition:opacity 1s ease-in-out;opacity:0;">
       </div>
     </div>
   </div>
@@ -1498,8 +1493,8 @@ function toggleMenu(){
   let showA = true;
   setInterval(()=>{
     showA = !showA;
-    a.className = showA ? 'fade-visible' : 'fade-hidden';
-    b.className = showA ? 'fade-hidden' : 'fade-visible';
+    a.style.opacity = showA ? '1' : '0';
+    b.style.opacity = showA ? '0' : '1';
   }, 3000);
 })();
 
