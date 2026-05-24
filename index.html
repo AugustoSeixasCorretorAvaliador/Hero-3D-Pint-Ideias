@@ -99,20 +99,6 @@
     transition:.3s;
   }
   nav a:hover{color:var(--orange);}
-  .btn-hotmart{
-    background:linear-gradient(135deg,#e8321a,#c0392b);
-    color:#fff;
-    padding:10px 20px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:700;
-    font-size:.85rem;
-    letter-spacing:.05em;
-    transition:.3s;
-    white-space:nowrap;
-    box-shadow:0 4px 20px rgba(232,50,26,0.35);
-  }
-  .btn-hotmart:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,50,26,0.55);}
   .btn-whatsapp{
     background:linear-gradient(135deg,#25D366,#128C7E);
     color:#fff;
@@ -263,11 +249,7 @@
     align-items:center;
     justify-content:center;
     pointer-events:none;
-    overflow:visible;
-  }
-  @keyframes float-banner{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
+    overflow:hidden;
   }
   .hero-img-container{
     position:relative;
@@ -555,7 +537,12 @@
     inset:0;
     background:linear-gradient(to top,rgba(3,6,16,0.7),transparent);
   }
-  .carousel-card{cursor:zoom-in;pointer-events:all;}
+  .carousel-card{cursor:zoom-in;pointer-events:all;position:relative;z-index:1;}
+
+  @keyframes float-banner{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
 
   /* ====== LIGHTBOX ====== */
   #lightbox{
@@ -963,8 +950,10 @@
     <a href="#custom">Impressão 3D</a>
     <a href="#contato">Contato</a>
   </nav>
-  <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank" rel="noopener" class="btn-hotmart">🛒 Hotmart</a>
-  <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 Falar no WhatsApp</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#e8321a,#c0392b);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.04em;transition:.3s;white-space:nowrap;box-shadow:0 4px 16px rgba(232,50,26,0.35);">🛒 Hotmart</a>
+    <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 WhatsApp</a>
+  </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1005,21 +994,23 @@
   <!-- Hero visuals -->
   <div class="hero-visuals">
     <div class="hero-img-container">
-      <!-- foto principal: fotoa1 centralizada -->
+      <!-- foto principal: fotoa1 -->
       <img class="hero-img-main" src="fotoa1.png" alt="HERO.3D Print Optimizer">
-      <!-- crossfade fotoc1/fotoc2 sobre a principal, posicionadas corretamente -->
+      <!-- crossfade fotoc1/fotoc2: posicionado ao lado esquerdo da principal, centrado verticalmente -->
       <div id="hcf" style="
         position:absolute;
-        top:18%;left:4%;
-        width:180px;height:220px;
-        border-radius:12px;
-        border:1px solid rgba(0,180,255,0.25);
-        box-shadow:0 0 20px rgba(0,180,255,0.2);
+        top:50%; left:2%;
+        transform:translateY(-50%);
+        width:190px; height:260px;
+        border-radius:14px;
+        border:1px solid rgba(0,180,255,0.3);
+        box-shadow:0 0 24px rgba(0,180,255,0.2);
         overflow:hidden;
-        animation:float 7s 0.5s ease-in-out infinite;
+        animation:float 7s 0.8s ease-in-out infinite;
+        flex-shrink:0;
       ">
-        <img id="hcf-a" src="fotoc1.png" alt="Personalizado 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;transition:opacity 1s ease-in-out;opacity:1;">
-        <img id="hcf-b" src="fotoc2.png" alt="Personalizado 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;transition:opacity 1s ease-in-out;opacity:0;">
+        <img id="hcf-a" src="fotoc1.png" alt="Personalizado 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity 1.2s ease-in-out;opacity:1;">
+        <img id="hcf-b" src="fotoc2.png" alt="Personalizado 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity 1.2s ease-in-out;opacity:0;">
       </div>
     </div>
   </div>
@@ -1489,40 +1480,48 @@ function toggleMenu(){
 (function(){
   const a = document.getElementById('hcf-a');
   const b = document.getElementById('hcf-b');
-  if(!a||!b) return;
+  if(!a || !b) return;
   let showA = true;
   setInterval(()=>{
     showA = !showA;
     a.style.opacity = showA ? '1' : '0';
     b.style.opacity = showA ? '0' : '1';
-  }, 3000);
+  }, 3200);
 })();
 
-// Lightbox
+// Lightbox — abre foto inteira ao clicar no carrossel
 (function(){
-  const lb = document.getElementById('lightbox');
+  const lb  = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
   const lbClose = document.getElementById('lightbox-close');
+  if(!lb || !lbImg) return;
 
-  document.querySelectorAll('.carousel-card').forEach(card=>{
-    card.addEventListener('click',function(){
-      const src = this.querySelector('img').src;
-      const alt = this.querySelector('img').alt;
-      lbImg.src = src;
-      lbImg.alt = alt;
-      lb.classList.add('open');
-      document.body.style.overflow='hidden';
-    });
-  });
-
+  function openLb(src, alt){
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.style.display = 'flex';
+    requestAnimationFrame(()=>lb.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+  }
   function closeLb(){
     lb.classList.remove('open');
-    document.body.style.overflow='';
-    lbImg.src='';
+    document.body.style.overflow = '';
+    setTimeout(()=>{ lb.style.display='none'; lbImg.src=''; }, 300);
   }
-  lbClose.addEventListener('click',closeLb);
-  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+
+  // delegar clique em qualquer .carousel-card na página
+  document.addEventListener('click', function(e){
+    const card = e.target.closest('.carousel-card');
+    if(card){
+      e.stopPropagation();
+      const img = card.querySelector('img');
+      if(img) openLb(img.src, img.alt);
+    }
+  }, true); // capture phase — evita bloqueio de pointer-events
+
+  if(lbClose) lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
 })();
 
 // Header scroll effect
