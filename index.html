@@ -537,43 +537,39 @@
     inset:0;
     background:linear-gradient(to top,rgba(3,6,16,0.7),transparent);
   }
-  .carousel-card{cursor:zoom-in;}
+  .carousel-card{cursor:zoom-in;pointer-events:all;position:relative;z-index:1;}
+
+  @keyframes float-banner{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
 
   /* ====== LIGHTBOX ====== */
   #lightbox{
+    display:none;
     position:fixed;
     inset:0;
-    z-index:99999;
-    background:rgba(0,0,0,0.95);
-    backdrop-filter:blur(12px);
-    display:flex;
+    z-index:9999;
+    background:rgba(0,0,0,0.92);
+    backdrop-filter:blur(10px);
     align-items:center;
     justify-content:center;
     padding:20px;
     cursor:zoom-out;
-    opacity:0;
-    visibility:hidden;
-    transition:opacity .3s ease, visibility .3s ease;
   }
-  #lightbox.open{
-    opacity:1;
-    visibility:visible;
-  }
+  #lightbox.open{display:flex;}
   #lightbox img{
-    max-width:90vw;
-    max-height:90vh;
-    width:auto;
-    height:auto;
+    max-width:92vw;
+    max-height:92vh;
     object-fit:contain;
     border-radius:12px;
-    box-shadow:0 0 80px rgba(255,107,0,0.25),0 0 160px rgba(0,180,255,0.1);
-    transform:scale(.92);
-    transition:transform .3s ease;
+    box-shadow:0 0 60px rgba(255,107,0,0.2),0 0 120px rgba(0,180,255,0.1);
+    animation:lb-in .25s ease;
     cursor:default;
-    display:block;
   }
-  #lightbox.open img{
-    transform:scale(1);
+  @keyframes lb-in{
+    from{opacity:0;transform:scale(.9);}
+    to{opacity:1;transform:scale(1);}
   }
   #lightbox-close{
     position:fixed;
@@ -581,15 +577,15 @@
     font-size:1.4rem;
     color:#fff;
     cursor:pointer;
-    background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.1);
     border:none;
-    width:48px;height:48px;
+    width:44px;height:44px;
     border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     transition:.2s;
-    z-index:100000;
+    z-index:10000;
   }
-  #lightbox-close:hover{background:rgba(255,107,0,0.6);transform:scale(1.1);}
+  #lightbox-close:hover{background:rgba(255,107,0,0.4);}
 
   /* ====== VIDEO ====== */
   .video-wrap{
@@ -954,7 +950,10 @@
     <a href="#custom">Impressão 3D</a>
     <a href="#contato">Contato</a>
   </nav>
-  <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 Falar no WhatsApp</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="https://augustosseixas.hotmart.host/link-na-bio-037e1d56-7660-4497-baa2-d308fb1bad5d" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#e8321a,#c0392b);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.04em;transition:.3s;white-space:nowrap;box-shadow:0 4px 16px rgba(232,50,26,0.35);">🛒 Hotmart</a>
+    <a href="https://wa.me/5521985653880" target="_blank" class="btn-whatsapp">🚀 WhatsApp</a>
+  </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -977,6 +976,7 @@
   <div class="particles" id="particles"></div>
 
   <div class="hero-content">
+    <img src="baner3dpi.png" alt="3D Print Idéias" style="width:min(460px,100%);margin-bottom:28px;border-radius:12px;display:block;animation:float-banner 5s ease-in-out infinite;filter:drop-shadow(0 8px 24px rgba(255,107,0,0.25));">
     <div class="hero-badge">🚀 Impressão 3D + Inteligência Artificial</div>
     <h1>
       Transformando ideias em<br>
@@ -994,9 +994,24 @@
   <!-- Hero visuals -->
   <div class="hero-visuals">
     <div class="hero-img-container">
-      <img class="hero-img-main" src="fotob2.png" alt="3D Print Idéias Banner" style="width:min(520px,95%);border-radius:12px;">
-      <img class="hero-img-secondary hi-1" src="fotoa1.png" alt="HERO.3D AI">
-      <img class="hero-img-secondary hi-2" src="fotoc2.png" alt="3D Print Personalizado">
+      <!-- foto principal: fotoa1 -->
+      <img class="hero-img-main" src="fotoa1.png" alt="HERO.3D Print Optimizer">
+      <!-- crossfade fotoc1/fotoc2: posicionado ao lado esquerdo da principal, centrado verticalmente -->
+      <div id="hcf" style="
+        position:absolute;
+        top:50%; left:2%;
+        transform:translateY(-50%);
+        width:190px; height:260px;
+        border-radius:14px;
+        border:1px solid rgba(0,180,255,0.3);
+        box-shadow:0 0 24px rgba(0,180,255,0.2);
+        overflow:hidden;
+        animation:float 7s 0.8s ease-in-out infinite;
+        flex-shrink:0;
+      ">
+        <img id="hcf-a" src="fotoc1.png" alt="Personalizado 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity 1.2s ease-in-out;opacity:1;">
+        <img id="hcf-b" src="fotoc2.png" alt="Personalizado 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity 1.2s ease-in-out;opacity:0;">
+      </div>
     </div>
   </div>
 </section>
@@ -1461,42 +1476,52 @@ function toggleMenu(){
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
 })();
 
-// Lightbox — clique no carrossel abre foto inteira
+// Crossfade fotoc1 / fotoc2
 (function(){
-  const lb     = document.getElementById('lightbox');
-  const lbImg  = document.getElementById('lightbox-img');
-  const lbClose= document.getElementById('lightbox-close');
+  const a = document.getElementById('hcf-a');
+  const b = document.getElementById('hcf-b');
+  if(!a || !b) return;
+  let showA = true;
+  setInterval(()=>{
+    showA = !showA;
+    a.style.opacity = showA ? '1' : '0';
+    b.style.opacity = showA ? '0' : '1';
+  }, 3200);
+})();
+
+// Lightbox — abre foto inteira ao clicar no carrossel
+(function(){
+  const lb  = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbClose = document.getElementById('lightbox-close');
   if(!lb || !lbImg) return;
 
-  // Adiciona data-src em cada card para guardar o src limpo
-  document.querySelectorAll('.carousel-card').forEach(function(card){
-    const img = card.querySelector('img');
-    if(img) card.setAttribute('data-src', img.getAttribute('src'));
-  });
-
-  function openLb(src){
+  function openLb(src, alt){
     lbImg.src = src;
-    lb.classList.add('open');
+    lbImg.alt = alt || '';
+    lb.style.display = 'flex';
+    requestAnimationFrame(()=>lb.classList.add('open'));
     document.body.style.overflow = 'hidden';
   }
   function closeLb(){
     lb.classList.remove('open');
     document.body.style.overflow = '';
-    setTimeout(function(){ lbImg.src = ''; }, 300);
+    setTimeout(()=>{ lb.style.display='none'; lbImg.src=''; }, 300);
   }
 
-  // Capture phase no document inteiro — passa por cima de qualquer pointer-events
+  // delegar clique em qualquer .carousel-card na página
   document.addEventListener('click', function(e){
     const card = e.target.closest('.carousel-card');
     if(card){
-      const src = card.getAttribute('data-src');
-      if(src){ openLb(src); }
+      e.stopPropagation();
+      const img = card.querySelector('img');
+      if(img) openLb(img.src, img.alt);
     }
-  }, true);
+  }, true); // capture phase — evita bloqueio de pointer-events
 
-  if(lbClose) lbClose.addEventListener('click', function(e){ e.stopPropagation(); closeLb(); });
-  lb.addEventListener('click', function(e){ if(e.target === lb || e.target === lbImg) closeLb(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
+  if(lbClose) lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
 })();
 
 // Header scroll effect
