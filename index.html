@@ -528,7 +528,9 @@
   .carousel-card:hover{transform:scale(1.03);box-shadow:0 20px 60px rgba(255,107,0,0.2);border-color:rgba(255,107,0,0.3);}
   .carousel-card img{
     width:100%;height:100%;
-    object-fit:cover;
+    object-fit:contain;
+    object-position:center top;
+    background:rgba(3,6,16,0.95);
     transition:.4s;
   }
   .carousel-card:hover img{transform:scale(1.08);}
@@ -586,6 +588,37 @@
     z-index:10000;
   }
   #lightbox-close:hover{background:rgba(255,107,0,0.4);}
+  .lightbox-nav{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,0.14);
+    color:#fff;
+    font-size:2rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:10000;
+    transition:.2s;
+  }
+  .lightbox-nav:hover{background:rgba(255,107,0,0.45);}
+  #lightbox-prev{left:20px;}
+  #lightbox-next{right:20px;}
+  @media (max-width: 700px){
+    .lightbox-nav{
+      width:44px;
+      height:44px;
+      font-size:1.6rem;
+    }
+    #lightbox-prev{left:12px;}
+    #lightbox-next{right:12px;}
+  }
 
   /* ====== VIDEO ====== */
   .video-wrap{
@@ -1491,37 +1524,69 @@ function toggleMenu(){
 
 // Lightbox — abre foto inteira ao clicar no carrossel
 (function(){
-  const lb  = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const lbClose = document.getElementById('lightbox-close');
-  if(!lb || !lbImg) return;
+  function initLightbox(){
+    const lb  = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+    if(!lb || !lbImg) return;
+    const galleryImages = Array.from(document.querySelectorAll('.carousel-card img'));
+    let currentIndex = -1;
 
-  function openLb(src, alt){
-    lbImg.src = src;
-    lbImg.alt = alt || '';
-    lb.style.display = 'flex';
-    requestAnimationFrame(()=>lb.classList.add('open'));
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLb(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(()=>{ lb.style.display='none'; lbImg.src=''; }, 300);
-  }
-
-  // delegar clique em qualquer .carousel-card na página
-  document.addEventListener('click', function(e){
-    const card = e.target.closest('.carousel-card');
-    if(card){
-      e.stopPropagation();
-      const img = card.querySelector('img');
-      if(img) openLb(img.src, img.alt);
+    function openLb(src, alt){
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.style.display = 'flex';
+      requestAnimationFrame(()=>lb.classList.add('open'));
+      document.body.style.overflow = 'hidden';
     }
-  }, true); // capture phase — evita bloqueio de pointer-events
+    function closeLb(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      currentIndex = -1;
+      setTimeout(()=>{ lb.style.display='none'; lbImg.src=''; }, 300);
+    }
+    function openLbByIndex(idx){
+      if(!galleryImages.length) return;
+      currentIndex = (idx + galleryImages.length) % galleryImages.length;
+      const img = galleryImages[currentIndex];
+      openLb(img.src, img.alt);
+    }
+    function prevLb(){ if(galleryImages.length) openLbByIndex(currentIndex - 1); }
+    function nextLb(){ if(galleryImages.length) openLbByIndex(currentIndex + 1); }
 
-  if(lbClose) lbClose.addEventListener('click', closeLb);
-  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+    // delegar clique em qualquer .carousel-card na página
+    document.addEventListener('click', function(e){
+      const card = e.target.closest('.carousel-card');
+      if(card){
+        e.stopPropagation();
+        const img = card.querySelector('img');
+        if(img){
+          const idx = galleryImages.indexOf(img);
+          if(idx >= 0) openLbByIndex(idx);
+          else openLb(img.src, img.alt);
+        }
+      }
+    }, true); // capture phase — evita bloqueio de pointer-events
+
+    if(lbClose) lbClose.addEventListener('click', closeLb);
+    if(lbPrev) lbPrev.addEventListener('click', function(e){ e.stopPropagation(); prevLb(); });
+    if(lbNext) lbNext.addEventListener('click', function(e){ e.stopPropagation(); nextLb(); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+    document.addEventListener('keydown', function(e){
+      if(!lb.classList.contains('open')) return;
+      if(e.key==='Escape') closeLb();
+      if(e.key==='ArrowLeft') prevLb();
+      if(e.key==='ArrowRight') nextLb();
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
 })();
 
 // Header scroll effect
@@ -1536,6 +1601,8 @@ window.addEventListener('scroll',()=>{
 </script>
 <!-- Lightbox -->
 <div id="lightbox">
+  <button id="lightbox-prev" class="lightbox-nav" title="Anterior (Seta esquerda)" aria-label="Imagem anterior">‹</button>
+  <button id="lightbox-next" class="lightbox-nav" title="Próxima (Seta direita)" aria-label="Próxima imagem">›</button>
   <button id="lightbox-close" title="Fechar (Esc)">✕</button>
   <img id="lightbox-img" src="" alt="">
 </div>
